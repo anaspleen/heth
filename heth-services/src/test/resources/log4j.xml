@@ -30,36 +30,12 @@
 		<appender-ref ref="DAO_FILE_APPENDER" />
 	</appender>
 
-	<!-- ********** APPENDERS DEFINITION (begin) ********** -->
-	<appender name="DAO_AUDIT_FILE_APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="../target/logs/capboard-audit.log" />
-		<param name="Threshold" value="DEBUG" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern"
-				value="%d{yyyy-MM-dd HH:mm:ss,SSS} %X{idTeleservice} %X{url} %X{code_retour} %X{duree}%n" />
-		</layout>
-	</appender>
-
-	<!-- asynchrone -->
-	<appender name="ASYNCPROD_DAO_FILE_APPENDER" class="org.apache.log4j.AsyncAppender">
-		<appender-ref ref="DAO_FILE_APPENDER" />
-	</appender>
-
 	<!-- ********** LOGGERS DEFINITION (begin) ********** -->
-	<logger name="eu.capsys.uncap.caplog">
+	<logger name="eu.heth">
 		<level value="DEBUG" />
 	</logger>
 
-	<logger name="org.apache.spark">
-		<level value="WARN" />
-	</logger>
-
 	<!-- ********** LOGGERS DEFINITION (begin) ********** -->
-	<logger name="ROSA_AUDIT">
-		<level value="INFO" />
-		<appender-ref ref="DAO_AUDIT_FILE_APPENDER" />
-	</logger>
-
 	<root>
 		<level value="INFO" />
 		<appender-ref ref="ASYNCPROD_DAO_FILE_APPENDER" />

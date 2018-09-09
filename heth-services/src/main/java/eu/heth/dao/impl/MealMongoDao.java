@@ -5,9 +5,10 @@ package eu.heth.dao.impl;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import eu.heth.dao.MealDao;
 import eu.heth.entity.MealEntity;
@@ -18,6 +19,9 @@ import eu.heth.exception.SystemException;
  *
  */
 public class MealMongoDao implements MealDao {
+
+	/** logger */
+	private static final Logger LOG = LoggerFactory.getLogger(MealMongoDao.class);
 
 	/*
 	 * (non-Javadoc)
@@ -103,7 +107,7 @@ public class MealMongoDao implements MealDao {
 	 * @see eu.heth.dao.MealDao#findById(java.lang.String)
 	 */
 	@Override
-	public Log findById(String uid) throws SystemException {
+	public MealEntity findById(String uid) throws SystemException {
 		// TODO Auto-generated method stub
 		return null;
 	}

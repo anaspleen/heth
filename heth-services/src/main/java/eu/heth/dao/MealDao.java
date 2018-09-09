@@ -5,7 +5,6 @@ package eu.heth.dao;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -101,7 +100,7 @@ public interface MealDao {
 	 * @throws SystemException
 	 *             error
 	 */
-	Log findById(String uid) throws SystemException;
+	MealEntity findById(String uid) throws SystemException;
 
 	/**
 	 * Get the Log with uid (with ObjectId)
