@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -7,7 +8,7 @@
 	<artifactId>heth</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>Heth :: To upgrade the world</name>
+	<name>Heth :: Chut chut not talking about brand</name>
 	<description></description>
 	<packaging>pom</packaging>
 
@@ -26,33 +27,45 @@
 		<!-- encodage des sources ! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<!-- dependencies versions -->
+
+		<!-- logs -->
 		<slf4j.version>1.7.21</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
-		<commons-io.version>2.4</commons-io.version>
-		<commons-lang3.version>3.4</commons-lang3.version>
-		<mongodb.version>3.2.2</mongodb.version>
-		<jersey.version>1.18.1</jersey.version>
-		<servlet-api.version>2.5</servlet-api.version>
-		<jsp-api.version>2.0</jsp-api.version>
-		<rs-api.version>2.0-m01</rs-api.version>
-		<jsr311-api.version>1.1.1</jsr311-api.version>
-		<maven-war-plugin.version>3.0.0</maven-war-plugin.version>
-		<maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
-		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
-		<maven-release-plugin.version>2.5.1</maven-release-plugin.version>
-		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
-		<wro4j.version>1.8.0</wro4j.version>
-		<pi4j.version>1.1</pi4j.version>
-		<pdfbox.version>2.0.4</pdfbox.version>
-		<paho.version>1.1.1</paho.version>
+
+		<!-- commons -->
+		<commons-io.version>2.6</commons-io.version>
+		<commons-lang3.version>3.8</commons-lang3.version>
+		<jersey2.version>2.27</jersey2.version>
 		<junit.version>4.11</junit.version>
-		<spring.version>4.2.1.RELEASE</spring.version>
+		<spring.version>5.0.9.RELEASE</spring.version>
+		<gson.version>2.8.5</gson.version>
+
+
+		<!-- Mongo -->
+		<mongodb.version>3.8.1</mongodb.version>
+		<bson.version>3.8.1</bson.version>
+		<mongo-java-driver.version>3.8.1</mongo-java-driver.version>
+		<mongodb-driver-core.version>3.8.1</mongodb-driver-core.version>
+
+		<!-- API REST -->
+		<servlet-api.version>4.0.1</servlet-api.version>
+		<jsp-api.version>2.3.1</jsp-api.version>
+		<rs-api.version>2.1</rs-api.version>
+		<jsr311-api.version>1.1.1</jsr311-api.version>
+		<jaxrs.version>2.1</jaxrs.version>
+
+		<!-- plugins -->
+		<maven-war-plugin.version>3.2.2</maven-war-plugin.version>
+		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+		<maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
+
 	</properties>
 
 	<modules>
 		<module>heth-services</module>
-		<module>heth-api</module>
+		<!-- <module>heth-api</module> -->
 	</modules>
 
 	<dependencyManagement>
@@ -73,7 +86,20 @@
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons-lang3.version}</version>
 			</dependency>
-			<!-- javax -->
+
+			<!-- JSON -->
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>${gson.version}</version>
+			</dependency>
+
+			<!-- API REST -->
+			<dependency>
+				<groupId>javax.ws.rs</groupId>
+				<artifactId>javax.ws.rs-api</artifactId>
+				<version>${jaxrs.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
@@ -92,24 +118,46 @@
 			<dependency>
 				<groupId>javax.ws.rs</groupId>
 				<artifactId>jsr311-api</artifactId>
-				<version>1.1.1</version>
+				<version>${jsr311-api.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.sun.jersey</groupId>
+				<groupId>org.glassfish.jersey.containers</groupId>
+				<artifactId>jersey-container-servlet</artifactId>
+				<version>${jersey2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jersey.core</groupId>
 				<artifactId>jersey-server</artifactId>
-				<version>${jersey.version}</version>
+				<version>${jersey2.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.sun.jersey</groupId>
-				<artifactId>jersey-servlet</artifactId>
-				<version>${jersey.version}</version>
+				<groupId>org.glassfish.jersey.core</groupId>
+				<artifactId>jersey-client</artifactId>
+				<version>${jersey2.version}</version>
 			</dependency>
+
 			<!-- DB -->
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>bson</artifactId>
+				<version>${bson.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.mongodb</groupId>
 				<artifactId>mongodb-driver</artifactId>
 				<version>${mongodb.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>mongo-java-driver</artifactId>
+				<version>${mongo-java-driver.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>mongodb-driver-core</artifactId>
+				<version>${mongodb-driver-core.version}</version>
+			</dependency>
+
 			<!-- Spring -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -136,6 +184,7 @@
 				<artifactId>spring-tx</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+
 			<!-- Tests -->
 			<dependency>
 				<groupId>org.springframework</groupId>
