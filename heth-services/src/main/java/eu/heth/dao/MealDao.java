@@ -5,7 +5,6 @@ package eu.heth.dao;
 
 import java.util.List;
 
-import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import eu.heth.entity.MealEntity;
@@ -63,7 +62,7 @@ public interface MealDao {
 	 * @throws SystemException
 	 *             technical exception
 	 */
-	String saveOneDocument(Document document) throws SystemException;
+	String saveOneDocument(MealEntity document) throws SystemException;
 
 	/**
 	 * To drop collection. Use in TestU only
@@ -89,7 +88,7 @@ public interface MealDao {
 	 * @throws SystemException
 	 *             error
 	 */
-	Document getTheFirstDocument() throws SystemException;
+	MealEntity getTheFirstDocument() throws SystemException;
 
 	/**
 	 * Get the Log with uid
@@ -111,7 +110,7 @@ public interface MealDao {
 	 * @throws SystemException
 	 *             error
 	 */
-	Document findDocumentById(String uid) throws SystemException;
+	MealEntity findDocumentById(String uid) throws SystemException;
 
 	/**
 	 * To update a Document (with ObjectId)
@@ -123,5 +122,6 @@ public interface MealDao {
 	 * @throws SystemException
 	 *             error
 	 */
-	void update(String uid, Bson doc) throws SystemException;
+	void update(String uid, MealEntity doc) throws SystemException;
 }
+

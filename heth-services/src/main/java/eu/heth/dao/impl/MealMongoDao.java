@@ -60,11 +60,23 @@ public class MealMongoDao extends AbstractMongoDao implements MealDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see eu.heth.dao.MealDao#saveOneDocument(org.bson.Document)
+	 * @see eu.heth.dao.MealDao#saveOneDocument(eu.heth.entity.MealEntity)
 	 */
 	@Override
-	public String saveOneDocument(Document document) throws SystemException {
+	public String saveOneDocument(MealEntity meal) throws SystemException {
+
+		// TODO transform MealEntity to document
+		Document document = toDocument(meal);
+
 		return saveOneDocument(document, getKeyCollectionName());
+	}
+
+	private Document toDocument(MealEntity meal) {
+		// TODO Auto-generated method stub
+		Document doc = new Document();
+		doc.append("cooker", "tdurand");
+
+		return doc;
 	}
 
 	/*
@@ -94,7 +106,7 @@ public class MealMongoDao extends AbstractMongoDao implements MealDao {
 	 * @see eu.heth.dao.MealDao#getTheFirstDocument()
 	 */
 	@Override
-	public Document getTheFirstDocument() throws SystemException {
+	public MealEntity getTheFirstDocument() throws SystemException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -116,7 +128,7 @@ public class MealMongoDao extends AbstractMongoDao implements MealDao {
 	 * @see eu.heth.dao.MealDao#findDocumentById(java.lang.String)
 	 */
 	@Override
-	public Document findDocumentById(String uid) throws SystemException {
+	public MealEntity findDocumentById(String uid) throws SystemException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -124,10 +136,10 @@ public class MealMongoDao extends AbstractMongoDao implements MealDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see eu.heth.dao.MealDao#update(java.lang.String, org.bson.conversions.Bson)
+	 * @see eu.heth.dao.MealDao#update(java.lang.String, eu.heth.entity.MealEntity)
 	 */
 	@Override
-	public void update(String uid, Bson doc) throws SystemException {
+	public void update(String uid, MealEntity meal) throws SystemException {
 		// TODO Auto-generated method stub
 
 	}

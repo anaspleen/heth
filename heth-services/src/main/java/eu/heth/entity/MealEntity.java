@@ -19,11 +19,14 @@ public class MealEntity implements Serializable {
 	/** the name */
 	private String name;
 
+	/** the cooker */
+	private String cooker;
+
 	/**
 	 * Default const
 	 */
 	public MealEntity() {
-		// TODO Auto-generated constructor stub
+		// NTD
 	}
 
 	public String getName() {
@@ -32,5 +35,20 @@ public class MealEntity implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the cooker
+	 */
+	public String getCooker() {
+		return cooker;
+	}
+
+	/**
+	 * @param cooker
+	 *            the cooker to set
+	 */
+	public void setCooker(String cooker) {
+		this.cooker = cooker;
 	}
 }

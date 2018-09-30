@@ -6,6 +6,8 @@ package eu.heth.test.dao;
 import org.bson.Document;
 import org.junit.Test;
 
+import eu.heth.entity.MealEntity;
+
 /**
  * test of dao.
  *
@@ -25,8 +27,8 @@ public class TestMealDao extends CapCommonTestCase {
 
 	@Test
 	public void testInsertAndAddHistory() throws Exception {
-		Document doc = createMeal();
-		String uid = getMealDao().saveOneDocument(doc);
+		MealEntity meal = createMeal();
+		String uid = getMealDao().saveOneDocument(meal);
 		System.out.println(uid);
 
 		// get it
@@ -53,12 +55,13 @@ public class TestMealDao extends CapCommonTestCase {
 		// Assert.assertEquals(1, logE.getHistories().size());
 	}
 
-	private Document createMeal() {
-		Document doc = new Document();
+	private MealEntity createMeal() {
+		MealEntity meal = new MealEntity();
 
+		Document doc = new Document();
 		doc.append("cooker", "tdurand");
 		doc.append("meal", "gigot d'agneau");
 
-		return doc;
+		return meal;
 	}
 }
