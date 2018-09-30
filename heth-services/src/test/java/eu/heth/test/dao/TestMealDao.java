@@ -3,7 +3,6 @@
  */
 package eu.heth.test.dao;
 
-import org.bson.Document;
 import org.junit.Test;
 
 import eu.heth.entity.MealEntity;
@@ -58,9 +57,8 @@ public class TestMealDao extends CapCommonTestCase {
 	private MealEntity createMeal() {
 		MealEntity meal = new MealEntity();
 
-		Document doc = new Document();
-		doc.append("cooker", "tdurand");
-		doc.append("meal", "gigot d'agneau");
+		meal.setCooker("tdurand");
+		meal.setName("Gigot d'agneau");
 
 		return meal;
 	}

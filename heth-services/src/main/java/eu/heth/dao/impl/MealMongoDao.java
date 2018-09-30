@@ -10,6 +10,8 @@ import org.bson.conversions.Bson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mongodb.client.MongoCollection;
+
 import eu.heth.dao.MealDao;
 import eu.heth.entity.MealEntity;
 import eu.heth.exception.SystemException;
@@ -67,8 +69,41 @@ public class MealMongoDao extends AbstractMongoDao implements MealDao {
 
 		// TODO transform MealEntity to document
 		Document document = toDocument(meal);
+		//
+		// return saveOneDocument(document, getKeyCollectionName());
 
-		return saveOneDocument(document, getKeyCollectionName());
+		// CodecRegistry pojoCodecRegistry =
+		// fromRegistries(MongoClient.getDefaultCodecRegistry(),
+		// fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+		//
+		//
+		// MongoClient mongoClient = new MongoClient("localhost",
+		// MongoClientOptions.builder().codecRegistry(pojoCodecRegistry).build());
+
+		// https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb-parent/2.1.0.RELEASE
+		// https://www.baeldung.com/spring-data-mongodb-tutorial
+		// https://docs.spring.io/spring-data/data-document/docs/current/reference/html/
+
+		String res = "";
+		CapMongoClient client = null;
+
+		try {
+			client = getClient();
+			MongoCollection<Document> coll = getDatabase(client).getCollection(getCollectionName());
+			coll.insertOne(document);
+
+			res = document.get(TAG_ID).toString();
+		} catch (Exception e) {
+			LOG.error("Error on persisting document", e);
+			throw e;
+		} finally {
+			if (client != null) {
+				releaseClient(client);
+			}
+		}
+
+		return res;
+
 	}
 
 	private Document toDocument(MealEntity meal) {
