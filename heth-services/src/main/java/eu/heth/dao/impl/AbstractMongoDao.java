@@ -29,8 +29,8 @@ public abstract class AbstractMongoDao {
 	/** logger */
 	private static final Logger LOG = LoggerFactory.getLogger(AbstractMongoDao.class);
 
-	/** The sparkcontext properties. */
-	private Properties caplogProperties;
+	/** The properties. */
+	private Properties daoProperties;
 
 	/** tags id */
 	public static final String TAG_ID = "_id";
@@ -106,7 +106,7 @@ public abstract class AbstractMongoDao {
 	 * @return the databaseURL
 	 */
 	public String getDatabaseURL() {
-		return getCaplogProperties().getProperty(PropertiesConstantes.MONGODB_URI);
+		return getDaoProperties().getProperty(PropertiesConstantes.MONGODB_URI);
 	}
 
 	/**
@@ -114,7 +114,7 @@ public abstract class AbstractMongoDao {
 	 * @return the collection name to use
 	 */
 	protected String getCollectionName() {
-		return getCaplogProperties().getProperty(getKeyCollectionName());
+		return getDaoProperties().getProperty(getKeyCollectionName());
 	}
 
 	/**
@@ -125,18 +125,18 @@ public abstract class AbstractMongoDao {
 	protected abstract String getKeyCollectionName();
 
 	/**
-	 * @return the caplogProperties
+	 * @return the daoProperties
 	 */
-	public Properties getCaplogProperties() {
-		return caplogProperties;
+	public Properties getDaoProperties() {
+		return daoProperties;
 	}
 
 	/**
-	 * @param caplogProperties
-	 *            the caplogProperties to set
+	 * @param daoProperties
+	 *            the daoProperties to set
 	 */
-	public void setCaplogProperties(Properties caplogProperties) {
-		this.caplogProperties = caplogProperties;
+	public void setDaoProperties(Properties daoProperties) {
+		this.daoProperties = daoProperties;
 	}
 
 	/**

@@ -18,7 +18,7 @@ import eu.heth.exception.SystemException;
  * @author tomey
  *
  */
-public class MealMongoDao implements MealDao {
+public class MealMongoDao extends AbstractMongoDao implements MealDao {
 
 	/** logger */
 	private static final Logger LOG = LoggerFactory.getLogger(MealMongoDao.class);
@@ -64,8 +64,7 @@ public class MealMongoDao implements MealDao {
 	 */
 	@Override
 	public String saveOneDocument(Document document) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
+		return saveOneDocument(document, getKeyCollectionName());
 	}
 
 	/*
@@ -75,8 +74,7 @@ public class MealMongoDao implements MealDao {
 	 */
 	@Override
 	public void dropCollection() throws SystemException {
-		// TODO Auto-generated method stub
-
+		dropCollection(getKeyCollectionName());
 	}
 
 	/*
@@ -134,4 +132,13 @@ public class MealMongoDao implements MealDao {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see eu.heth.dao.impl.AbstractMongoDao#getKeyCollectionName()
+	 */
+	@Override
+	protected String getKeyCollectionName() {
+		return "meal";
+	}
 }

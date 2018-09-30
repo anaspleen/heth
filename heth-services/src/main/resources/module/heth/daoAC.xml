@@ -15,7 +15,7 @@
 	</bean>
 
 	<!-- daos -->
-	<bean id="logDao" class="eu.heth.dao.impl.MealMongoDao"
+	<bean id="mealDao" class="eu.heth.dao.impl.MealMongoDao"
 		parent="abstractDao">
 	</bean>
 
