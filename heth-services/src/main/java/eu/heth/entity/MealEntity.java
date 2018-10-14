@@ -17,7 +17,7 @@ public class MealEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** id in database */
-//	@Id
+	// @Id
 	private String id;
 
 	/** the name */
@@ -31,6 +31,12 @@ public class MealEntity implements Serializable {
 	 */
 	public MealEntity() {
 		// NTD
+	}
+
+	public MealEntity(String name, String cooker) {
+		// super();
+		this.name = name;
+		this.cooker = cooker;
 	}
 
 	public String getName() {
@@ -69,5 +75,15 @@ public class MealEntity implements Serializable {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "MealEntity [id=" + id + ", name=" + name + ", cooker=" + cooker + "]";
 	}
 }
