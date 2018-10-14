@@ -74,6 +74,26 @@
 			<artifactId>mongodb-driver-core</artifactId>
 		</dependency>
 
+		<!-- Spring data -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.data</groupId> -->
+		<!-- <artifactId>spring-data-mongodb-parent</artifactId> -->
+		<!-- <scope>import</scope> -->
+		<!-- <type>pom</type> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.data</groupId> -->
+		<!-- <artifactId>spring-data-releasetrain</artifactId> -->
+		<!-- <scope>import</scope> -->
+		<!-- <type>pom</type> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+		</dependency>
+
+
+
 		<!-- for TestU -->
 		<dependency>
 			<groupId>junit</groupId>

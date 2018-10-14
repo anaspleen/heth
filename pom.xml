@@ -47,6 +47,9 @@
 		<mongo-java-driver.version>3.8.1</mongo-java-driver.version>
 		<mongodb-driver-core.version>3.8.1</mongodb-driver-core.version>
 
+		<!-- Spring Data -->
+		<spring-data-mongodb-parent.verson>2.1.0.RELEASE</spring-data-mongodb-parent.verson>
+
 		<!-- API REST -->
 		<servlet-api.version>4.0.1</servlet-api.version>
 		<jsp-api.version>2.3.1</jsp-api.version>
@@ -158,6 +161,21 @@
 				<version>${mongodb-driver-core.version}</version>
 			</dependency>
 
+			<!-- Spring data -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-mongodb-parent</artifactId>
+				<version>${spring-data-mongodb-parent.verson}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-releasetrain</artifactId>
+				<version>Lovelace-M3</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+
 			<!-- Spring -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -231,4 +249,17 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+
 </project>

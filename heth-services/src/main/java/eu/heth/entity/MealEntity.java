@@ -16,6 +16,10 @@ public class MealEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/** id in database */
+//	@Id
+	private String id;
+
 	/** the name */
 	private String name;
 
@@ -50,5 +54,20 @@ public class MealEntity implements Serializable {
 	 */
 	public void setCooker(String cooker) {
 		this.cooker = cooker;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 }
