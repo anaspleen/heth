@@ -3,6 +3,9 @@
 <beans>
 
 	<!-- daos -->
-	<import resource="classpath:module/heth/daoAC.xml" />
+<!-- 	<import resource="classpath:module/heth/daoAC.xml" /> -->
+
+	<!-- services -->
+	<import resource="classpath:module/heth/mealAC.xml" />
 
 </beans>

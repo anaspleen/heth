@@ -39,7 +39,7 @@
 		<junit.version>4.12</junit.version>
 		<spring.version>5.0.9.RELEASE</spring.version>
 		<gson.version>2.8.5</gson.version>
-
+		<commons-beanutils.version>1.9.3</commons-beanutils.version>
 
 		<!-- Mongo -->
 		<mongodb.version>3.8.1</mongodb.version>
@@ -53,7 +53,6 @@
 		<!-- API REST -->
 		<servlet-api.version>4.0.1</servlet-api.version>
 		<jsp-api.version>2.3.1</jsp-api.version>
-		<rs-api.version>2.1</rs-api.version>
 		<jsr311-api.version>1.1.1</jsr311-api.version>
 		<jaxrs.version>2.1</jaxrs.version>
 
@@ -63,6 +62,7 @@
 		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
 		<maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
+		<maven-surefire-plugin.version>2.12.4</maven-surefire-plugin.version>
 
 	</properties>
 
@@ -89,6 +89,11 @@
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons-lang3.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>${commons-beanutils.version}</version>
+			</dependency>
 
 			<!-- JSON -->
 			<dependency>
@@ -105,18 +110,14 @@
 			</dependency>
 			<dependency>
 				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
+				<artifactId>javax.servlet-api</artifactId>
 				<version>${servlet-api.version}</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>jsp-api</artifactId>
 				<version>${jsp-api.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.ws.rs</groupId>
-				<artifactId>javax.ws.rs-api</artifactId>
-				<version>${rs-api.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.ws.rs</groupId>
@@ -251,6 +252,15 @@
 					<artifactId>tomcat7-maven-plugin</artifactId>
 					<version>${tomcat.version}</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<skipTests>true</skipTests>
+					</configuration>
+				</plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -268,6 +278,11 @@
 			<id>spring-milestone</id>
 			<name>Spring Maven MILESTONE Repository</name>
 			<url>http://repo.spring.io/libs-milestone</url>
+		</repository>
+		<repository>
+			<id>servlet</id>
+			<name>Servlet Repository</name>
+			<url>https://mvnrepository.com/artifact</url>
 		</repository>
 	</repositories>
 

@@ -6,13 +6,14 @@ package eu.heth.test.dao;
 import org.junit.Test;
 
 import eu.heth.entity.MealEntity;
+import eu.heth.test.HethCommonTestCase;
 
 /**
  * test of dao.
  *
  * @author thomas
  */
-public class TestMealDao extends CapCommonTestCase {
+public class TestMealDao extends HethCommonTestCase {
 
 	/**
 	 * Instantiates a new test search service.

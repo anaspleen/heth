@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.heth.test.dao;
+package eu.heth.test;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import eu.heth.dao.MealDao;
 import eu.heth.exception.SystemException;
+import eu.heth.service.MealService;
 
 /**
  * The Class CapCommonTestCase.
@@ -21,14 +22,18 @@ import eu.heth.exception.SystemException;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/moduleTest/globalAC.xml" })
-public abstract class CapCommonTestCase {
+public abstract class HethCommonTestCase {
 
 	/** The Constant LOGIN_TEST. */
 	protected static final String LOGIN_TEST = "loginTest";
 
 	@Autowired
-	@Qualifier("mealDao")
+//	@Qualifier("mealDao")
 	private MealDao mealDao;
+
+	@Autowired
+	@Qualifier("mealService")
+	private MealService mealService;
 
 	/**
 	 * Default const.
@@ -36,7 +41,7 @@ public abstract class CapCommonTestCase {
 	 * @throws Exception
 	 *             exception
 	 */
-	public CapCommonTestCase() throws Exception {
+	public HethCommonTestCase() throws Exception {
 		// NTD
 	}
 
@@ -70,5 +75,9 @@ public abstract class CapCommonTestCase {
 
 	public MealDao getMealDao() {
 		return mealDao;
+	}
+
+	public MealService getMealService() {
+		return mealService;
 	}
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.1.xsd">
+
+	<!-- MongoFactoryBean instance -->
+	<mongo:mongo host="localhost" port="27017" />
+
+	<mongo:db-factory dbname="bank" mongo-ref="mongo" />
+
+	<!-- MongoTemplate instance -->
+	<bean id="mongoTemplate"
+		class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory"
+			ref="mongoDbFactory" />
+	</bean>
+
+	<bean id="mappingContext"
+		class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+
+	<bean id="entityInformationCreator"
+		class="org.springframework.data.mongodb.repository.support.DefaultEntityInformationCreator">
+		<constructor-arg name="mappingContext"
+			ref="mappingContext" />
+	</bean>
+	<mongo:repositories base-package="eu.heth.dao" />
+
+
+	<!-- Service meal. -->
+	<bean id="mealService"
+		class="eu.heth.service.impl.MealServiceImpl">
+	</bean>
+</beans>

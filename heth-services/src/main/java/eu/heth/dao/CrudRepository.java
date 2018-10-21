@@ -6,7 +6,7 @@ package eu.heth.dao;
 import java.io.Serializable;
 import java.util.Optional;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  * https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#mongo-template
@@ -14,12 +14,12 @@ import org.springframework.data.repository.Repository;
  * @author tomey
  *
  */
-public interface CrudRepository<T, ID extends Serializable> extends Repository<T, ID> {
+public interface CrudRepository<T, ID extends Serializable> extends MongoRepository<T, ID> {
 	<S extends T> S save(S entity);
 
 	Optional<T> findById(ID primaryKey);
 
-	Iterable<T> findAll();
+//	Iterable<T> findAll();
 
 	long count();
 

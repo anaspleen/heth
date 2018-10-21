@@ -5,10 +5,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 
-	<mongo:mongo-client id="mongoClient"
-		host="localhost" />
-	<mongo:db-factory id="mongoDbFactory" dbname="test"
-		mongo-ref="mongoClient" />
+<!-- 	<mongo:mongo-client id="mongoClient" -->
+<!-- 		host="localhost" /> -->
+<!-- 	<mongo:db-factory id="mongoDbFactory" dbname="test" -->
+<!-- 		mongo-ref="mongoClient" /> -->
 
 	<util:properties id="daoProperties"
 		location="classpath:/dao.properties" />

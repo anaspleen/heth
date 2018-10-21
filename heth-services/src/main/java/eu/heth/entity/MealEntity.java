@@ -5,10 +5,15 @@ package eu.heth.entity;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * @author tomey
  *
  */
+@Document(collection = "meal")
 public class MealEntity implements Serializable {
 
 	/**
@@ -17,13 +22,14 @@ public class MealEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** id in database */
-	// @Id
-	private String id;
+	@Id
+	private Long id;
 
 	/** the name */
 	private String name;
 
 	/** the cooker */
+	@Indexed(unique = true)
 	private String cooker;
 
 	/**
@@ -65,7 +71,7 @@ public class MealEntity implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -73,7 +79,7 @@ public class MealEntity implements Serializable {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
