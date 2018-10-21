@@ -1,9 +1,10 @@
 /**
  * 
  */
-package eu.heth.dao;
+package eu.heth.dao.repositories;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import eu.heth.entity.MealEntity;
 
@@ -15,7 +16,8 @@ import eu.heth.entity.MealEntity;
  */
 // No need implementation, just one interface, and you have CRUD, thanks Spring
 // Data
-public interface MealEntityRepository extends MongoRepository<MealEntity, Long>, MealEntityRepositoryCustom {
+@Repository
+public interface MealEntityRepository extends MongoRepository<MealEntity, Long> {
 
 	// long countByLastname(String lastname);
 

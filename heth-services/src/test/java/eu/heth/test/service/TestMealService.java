@@ -22,6 +22,6 @@ public class TestMealService extends HethCommonTestCase {
 	@Test
 	public void testInsertAndAddHistory() throws Exception {
 		
-		getMealService().getMealsFromCooker("test");
+		getMealService().getMealsFromCooker("testFFF");
 	}
 }

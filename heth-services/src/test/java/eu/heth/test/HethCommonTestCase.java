@@ -6,13 +6,11 @@ package eu.heth.test;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import eu.heth.dao.MealDao;
-import eu.heth.exception.SystemException;
+import eu.heth.configuration.ApplicationConfig;
 import eu.heth.service.MealService;
 
 /**
@@ -20,20 +18,14 @@ import eu.heth.service.MealService;
  *
  * @author tcaiati
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/moduleTest/globalAC.xml" })
+//@RunWith(SpringJUnit4ClassRunner.class)
 public abstract class HethCommonTestCase {
 
 	/** The Constant LOGIN_TEST. */
 	protected static final String LOGIN_TEST = "loginTest";
 
-	@Autowired
-//	@Qualifier("mealDao")
-	private MealDao mealDao;
-
-	@Autowired
-	@Qualifier("mealService")
-	private MealService mealService;
+	/** the context */
+	private AbstractApplicationContext context;
 
 	/**
 	 * Default const.
@@ -42,7 +34,7 @@ public abstract class HethCommonTestCase {
 	 *             exception
 	 */
 	public HethCommonTestCase() throws Exception {
-		// NTD
+		context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 	}
 
 	/**
@@ -55,11 +47,7 @@ public abstract class HethCommonTestCase {
 	public void setUp() throws Exception {
 
 		// drop, create, insert configuration
-		dropDatas();
-	}
-
-	private void dropDatas() throws SystemException {
-		getMealDao().dropCollection();
+		// dropDatas();
 	}
 
 	/**
@@ -73,11 +61,7 @@ public abstract class HethCommonTestCase {
 		//
 	}
 
-	public MealDao getMealDao() {
-		return mealDao;
-	}
-
 	public MealService getMealService() {
-		return mealService;
+		return (MealService) context.getBean("mealService");
 	}
 }

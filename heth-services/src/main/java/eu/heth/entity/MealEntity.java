@@ -23,7 +23,7 @@ public class MealEntity implements Serializable {
 
 	/** id in database */
 	@Id
-	private Long id;
+	private String id;
 
 	/** the name */
 	private String name;
@@ -71,7 +71,7 @@ public class MealEntity implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -79,7 +79,7 @@ public class MealEntity implements Serializable {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
