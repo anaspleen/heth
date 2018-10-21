@@ -39,6 +39,8 @@ public class MealServiceImpl implements MealService {
 	@Override
 	public List<Meal> getMealsFromCooker(String cooker) throws ApplicationException, SystemException {
 		// TODO Auto-generated method stub
+		
+		// http://www.technicalkeeda.com/spring-tutorials/spring-4-mongodb-repository-example
 
 		mealEntityRepository.save(new MealEntity("first", "cooker"));
 
