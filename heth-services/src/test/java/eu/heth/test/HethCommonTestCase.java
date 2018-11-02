@@ -9,6 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 import eu.heth.configuration.ApplicationConfig;
+import eu.heth.dao.repositories.MealEntityRepository;
 import eu.heth.service.MealService;
 
 /**
@@ -60,5 +61,9 @@ public abstract class HethCommonTestCase {
 
 	public MealService getMealService() {
 		return (MealService) context.getBean("mealService");
+	}
+
+	public MealEntityRepository getMealEntityRepository() {
+		return (MealEntityRepository) context.getBean("mealEntityRepository");
 	}
 }

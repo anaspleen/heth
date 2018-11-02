@@ -3,6 +3,8 @@
  */
 package eu.heth.api;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
@@ -32,18 +34,20 @@ public class MealController extends BaseController {
 
 	private static final String template = "Hello, %s!";
 	private final AtomicLong counter = new AtomicLong();
-	//
-	// @Autowired
-	// @Qualifier("mealService")
-	// private MealService mealService;
 
 	@RequestMapping(path = "/meal/get", method = RequestMethod.GET)
-	public Meal getMeal(@RequestParam(value = "name", defaultValue = "World") String name) {
+	public List<Meal> getMeal(@RequestParam(value = "cooker", defaultValue = "World") String cooker) {
 
 		MealService mealService = getMealService();
 
+		List<Meal> meals = new ArrayList<Meal>();
+
+		// meals.add(new MealBean("ddd","dd"));
+		// meals.add(new MealBean("ddds","dds"));
+
+		// FIXME method not found on repository why ?
 		try {
-			mealService.getMealsFromCooker(name);
+			meals = mealService.getMealsFromCooker(cooker);
 		} catch (ApplicationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,16 +56,19 @@ public class MealController extends BaseController {
 			e.printStackTrace();
 		}
 
-		return new MealBean(counter.incrementAndGet() + "", String.format(template, name));
+		System.out.println(meals);
+
+		return meals;
 	}
 
 	@RequestMapping(path = "/meal/save", method = RequestMethod.GET)
-	public Meal saveMeal(@RequestParam(value = "name", defaultValue = "World") String name) {
+	public Meal saveMeal(@RequestParam(value = "cooker", defaultValue = "World") String cooker) {
 
 		MealService mealService = getMealService();
 
+		String name = "APICook_" + System.currentTimeMillis();
 		try {
-			mealService.getMealsFromCooker(name);
+			mealService.saveMealsFromCooker(name, cooker);
 		} catch (ApplicationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +77,7 @@ public class MealController extends BaseController {
 			e.printStackTrace();
 		}
 
-		return new MealBean(counter.incrementAndGet() + "", String.format(template, name));
+		return new MealBean(name, String.format(template, cooker));
 	}
 
 	/**

@@ -24,6 +24,13 @@ public class MealBean implements Meal, Serializable {
 
 	/**
 	 * Default const
+	 */
+	public MealBean() {
+		// NTD
+	}
+
+	/**
+	 * Default const
 	 * 
 	 * @param cooker
 	 *            the cooker

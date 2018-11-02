@@ -3,6 +3,8 @@
  */
 package eu.heth.dao.repositories;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -24,4 +26,13 @@ public interface MealEntityRepository extends MongoRepository<MealEntity, Long> 
 	// long countByLastname(String lastname);
 
 	MealEntity findFirstByName(String name);
+
+	/**
+	 * Find meals by cooker
+	 * 
+	 * @param cooker
+	 *            the cooker
+	 * @return the meals found
+	 */
+	List<MealEntity> findByCooker(String cooker);
 }

@@ -3,8 +3,11 @@
  */
 package eu.heth.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import eu.heth.bean.Meal;
 import eu.heth.dao.repositories.MealEntityRepository;
 import eu.heth.entity.MealEntity;
 import eu.heth.exception.ApplicationException;
+import eu.heth.exception.IdentifiedError;
 import eu.heth.exception.SystemException;
 import eu.heth.service.MealService;
 
@@ -38,16 +42,33 @@ public class MealServiceImpl implements MealService {
 	 */
 	@Override
 	public List<Meal> getMealsFromCooker(String cooker) throws ApplicationException, SystemException {
-		// TODO Auto-generated method stub
 
-		// http://www.technicalkeeda.com/spring-tutorials/spring-4-mongodb-repository-example
+		System.out.println("cooker : " + cooker);
 
-		LOG.debug("In getMealsFromCooker");
-		
-		long currentTimeMillis = System.currentTimeMillis();
-		mealEntityRepository.save(new MealEntity("first_" + currentTimeMillis, cooker));
+		List<IdentifiedError> errors = new ArrayList<IdentifiedError>();
 
-		return null;
+		if (StringUtils.isEmpty(cooker)) {
+			errors.add(new IdentifiedError("error.meal.find.cooker.empty"));
+		}
+
+		// if error, throw it
+		if (errors.size() > 0) {
+			throw new ApplicationException(Arrays.asList(errors));
+		}
+
+		List<Meal> meals = new ArrayList<Meal>();
+
+		System.out.println(mealEntityRepository);
+
+		List<MealEntity> entities = mealEntityRepository.findByCooker(cooker);
+
+		if (entities != null && entities.size() > 0) {
+			for (MealEntity entity : entities) {
+				meals.add(MealHelper.toBean(entity));
+			}
+		}
+
+		return meals;
 	}
 
 	/*
@@ -58,11 +79,11 @@ public class MealServiceImpl implements MealService {
 	 */
 	@Override
 	public String saveMealsFromCooker(String name, String cooker) throws ApplicationException, SystemException {
-		
+
 		LOG.debug("In saveMealsFromCooker");
-		
+
 		long currentTimeMillis = System.currentTimeMillis();
-		MealEntity entity = mealEntityRepository.save(new MealEntity("first_" + currentTimeMillis, cooker));
+		MealEntity entity = mealEntityRepository.save(new MealEntity(name, cooker));
 		return entity.getId();
 	}
 
