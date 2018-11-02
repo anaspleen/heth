@@ -17,6 +17,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import com.mongodb.MongoClient;
 
 /**
+ * To manage Mongo stuff
  * 
  * http://www.technicalkeeda.com/spring-tutorials/spring-4-mongodb-repository-example
  * 
@@ -28,10 +29,20 @@ import com.mongodb.MongoClient;
 @EnableMongoRepositories({ "eu.heth.dao.repositories" })
 public class ApplicationConfig {
 
+	/**
+	 * The properties
+	 */
 	@Autowired
 	@Qualifier("configProperties")
 	private ConfigProperties configProperties;
 
+	/**
+	 * To manage factory
+	 * 
+	 * @return the factory
+	 * @throws Exception
+	 *             problem
+	 */
 	@Bean
 	public MongoDbFactory mongoDbFactory() throws Exception {
 
@@ -44,11 +55,17 @@ public class ApplicationConfig {
 
 	}
 
+	/**
+	 * To get mongo template
+	 * 
+	 * @return mongo template
+	 * @throws Exception
+	 *             problem
+	 */
 	@Bean
 	public MongoTemplate mongoTemplate() throws Exception {
 
 		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
 		return mongoTemplate;
-
 	}
 }

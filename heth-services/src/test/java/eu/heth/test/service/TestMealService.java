@@ -15,13 +15,11 @@ public class TestMealService extends HethCommonTestCase {
 
 	public TestMealService() throws Exception {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	
 	@Test
 	public void testInsertAndAddHistory() throws Exception {
-		
+		// TODO
 		getMealService().getMealsFromCooker("testFFF");
 	}
 }

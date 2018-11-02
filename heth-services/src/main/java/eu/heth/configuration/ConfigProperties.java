@@ -9,8 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 /**
- * 
- * http://www.technicalkeeda.com/spring-tutorials/spring-4-mongodb-repository-example
+ * To manage properties of application
  * 
  * @author tomey
  *
@@ -73,5 +72,4 @@ public class ConfigProperties {
 	public void setMongodbDatabase(String mongodbDatabase) {
 		this.mongodbDatabase = mongodbDatabase;
 	}
-
 }

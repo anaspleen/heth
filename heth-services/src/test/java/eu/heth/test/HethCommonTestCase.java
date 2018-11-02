@@ -12,9 +12,9 @@ import eu.heth.configuration.ApplicationConfig;
 import eu.heth.service.MealService;
 
 /**
- * The Class CapCommonTestCase.
+ * The Class HethCommonTestCase for all testU.
  *
- * @author tcaiati
+ * @author tomey
  */
 public abstract class HethCommonTestCase {
 

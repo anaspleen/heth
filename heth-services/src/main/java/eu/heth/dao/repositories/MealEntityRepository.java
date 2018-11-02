@@ -11,6 +11,8 @@ import eu.heth.entity.MealEntity;
 /**
  * https://www.mkyong.com/spring-boot/spring-boot-spring-data-mongodb-example/
  * 
+ * The meal repository
+ * 
  * @author tomey
  *
  */

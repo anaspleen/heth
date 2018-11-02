@@ -42,6 +42,8 @@ public class MealServiceImpl implements MealService {
 
 		// http://www.technicalkeeda.com/spring-tutorials/spring-4-mongodb-repository-example
 
+		LOG.debug("In getMealsFromCooker");
+		
 		long currentTimeMillis = System.currentTimeMillis();
 		mealEntityRepository.save(new MealEntity("first_" + currentTimeMillis, cooker));
 
@@ -56,6 +58,9 @@ public class MealServiceImpl implements MealService {
 	 */
 	@Override
 	public String saveMealsFromCooker(String name, String cooker) throws ApplicationException, SystemException {
+		
+		LOG.debug("In saveMealsFromCooker");
+		
 		long currentTimeMillis = System.currentTimeMillis();
 		MealEntity entity = mealEntityRepository.save(new MealEntity("first_" + currentTimeMillis, cooker));
 		return entity.getId();
