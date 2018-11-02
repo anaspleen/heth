@@ -3,8 +3,10 @@
  */
 package eu.heth.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -14,12 +16,17 @@ import org.springframework.context.annotation.PropertySource;
  *
  */
 @Configuration
-//@Configuration
 @PropertySource("classpath:heth.properties")
+@Service("configProperties")
 public class ConfigProperties {
 
+	@Value("${mongodb.host}")
 	private String mongodbHost;
+
+	@Value("${mongodb.port}")
 	private int mongodbPort;
+
+	@Value("${mongodb.database}")
 	private String mongodbDatabase;
 
 	/**

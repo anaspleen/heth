@@ -5,10 +5,8 @@ package eu.heth.test;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import eu.heth.configuration.ApplicationConfig;
 import eu.heth.service.MealService;
@@ -18,7 +16,6 @@ import eu.heth.service.MealService;
  *
  * @author tcaiati
  */
-//@RunWith(SpringJUnit4ClassRunner.class)
 public abstract class HethCommonTestCase {
 
 	/** The Constant LOGIN_TEST. */

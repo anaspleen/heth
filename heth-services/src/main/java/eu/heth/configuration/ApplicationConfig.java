@@ -3,6 +3,8 @@
  */
 package eu.heth.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,15 +27,20 @@ import com.mongodb.MongoClient;
 @ComponentScan(basePackages = "eu.heth")
 @EnableMongoRepositories({ "eu.heth.dao.repositories" })
 public class ApplicationConfig {
+
+	@Autowired
+	@Qualifier("configProperties")
+	private ConfigProperties configProperties;
+
 	@Bean
 	public MongoDbFactory mongoDbFactory() throws Exception {
 
-		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		MongoClient mongoClient = new MongoClient(configProperties.getMongodbHost(), configProperties.getMongodbPort());
 		UserCredentials userCredentials = new UserCredentials("", "");
 		// return new SimpleMongoDbFactory(mongoClient, "technicalkeeda",
 		// userCredentials);
 
-		return new SimpleMongoDbFactory(mongoClient, "testU");
+		return new SimpleMongoDbFactory(mongoClient, configProperties.getMongodbDatabase());
 
 	}
 
