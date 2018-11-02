@@ -26,10 +26,10 @@ public class MealEntity implements Serializable {
 	private String id;
 
 	/** the name */
+	@Indexed(unique = true)
 	private String name;
 
 	/** the cooker */
-	@Indexed(unique = true)
 	private String cooker;
 
 	/**

@@ -30,4 +30,19 @@ public interface MealService {
 	 */
 	List<Meal> getMealsFromCooker(String cooker) throws ApplicationException, SystemException;
 
+	/**
+	 * To save a meal
+	 * 
+	 * @param name
+	 *            the name of meal
+	 * @param cooker
+	 *            the cooker
+	 * @return the id in database
+	 * 
+	 * @throws ApplicationException
+	 *             applicative exception
+	 * @throws SystemException
+	 *             technical exception
+	 */
+	String saveMealsFromCooker(String name, String cooker) throws ApplicationException, SystemException;
 }

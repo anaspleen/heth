@@ -39,12 +39,26 @@ public class MealServiceImpl implements MealService {
 	@Override
 	public List<Meal> getMealsFromCooker(String cooker) throws ApplicationException, SystemException {
 		// TODO Auto-generated method stub
-		
+
 		// http://www.technicalkeeda.com/spring-tutorials/spring-4-mongodb-repository-example
 
-		mealEntityRepository.save(new MealEntity("first", "cooker"));
+		long currentTimeMillis = System.currentTimeMillis();
+		mealEntityRepository.save(new MealEntity("first_" + currentTimeMillis, cooker));
 
 		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see eu.heth.service.MealService#saveMealsFromCooker(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public String saveMealsFromCooker(String name, String cooker) throws ApplicationException, SystemException {
+		long currentTimeMillis = System.currentTimeMillis();
+		MealEntity entity = mealEntityRepository.save(new MealEntity("first_" + currentTimeMillis, cooker));
+		return entity.getId();
 	}
 
 	/**
