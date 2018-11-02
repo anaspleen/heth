@@ -4,6 +4,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.0.RELEASE</version>
+	</parent>
+
 	<groupId>eu.heth</groupId>
 	<artifactId>heth</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
@@ -47,7 +53,7 @@
 		<mongodb-driver-core.version>3.8.1</mongodb-driver-core.version>
 
 		<!-- Spring -->
-		<spring.version>5.0.9.RELEASE</spring.version>
+		<spring.version>5.1.2.RELEASE</spring.version>
 		<spring-data-mongodb.version>2.1.0.RELEASE</spring-data-mongodb.version>
 		<spring-boot.version>2.1.0.RELEASE</spring-boot.version>
 		<json-path.version>2.4.0</json-path.version>
