@@ -1,1 +1,6 @@
-Add heth.properties in classpath to use the service
+To add heth.properties, add env variable :
+export HETH_CONF_PATH=pathContainesProperties
+This path contains heth.properties
+
+Example :
+export HETH_CONF_PATH=/products/eclipse/ws/heth/heth-services/src/test/resources

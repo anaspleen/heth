@@ -32,6 +32,10 @@ public abstract class HethCommonTestCase {
 	 *             exception
 	 */
 	public HethCommonTestCase() throws Exception {
+		
+		// set default path for ConfigProperties
+		System.setProperty("HETH_CONF_PATH", "./src/test/resources");
+		
 		context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 	}
 
