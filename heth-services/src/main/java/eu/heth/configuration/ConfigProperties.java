@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
  */
 @Configuration
 @PropertySource("classpath:heth.properties")
+// FIXME for deployment mode :
+// @PropertySource("file:${MY_PATH}/heth.properties")
 @Service("configProperties")
 public class ConfigProperties {
 

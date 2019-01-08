@@ -32,14 +32,18 @@ public abstract class BaseController {
 	 */
 	protected AbstractApplicationContext getContext() {
 
-		// TODO get context from main ?
-
 		if (context == null) {
-			// TODO logger use log4j
-			LOG.info("Context initialized");
-			context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+			initializeContext();
 		}
 
 		return context;
+	}
+
+	/**
+	 * to initialize context once
+	 */
+	private synchronized void initializeContext() {
+		LOG.info("Context initialized");
+		context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 	}
 }
