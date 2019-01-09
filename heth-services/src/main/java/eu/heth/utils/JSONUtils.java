@@ -1,14 +1,15 @@
 /**
  * 
  */
-package eu.heth.dao.utils;
+package eu.heth.utils;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -22,7 +23,7 @@ import com.google.gson.JsonParser;
 public final class JSONUtils {
 
 	/** le logger */
-	private static final Logger LOG = Logger.getLogger(JSONUtils.class);
+	private static final Logger LOG = LoggerFactory.getLogger(JSONUtils.class);
 
 	/**
 	 * Default const

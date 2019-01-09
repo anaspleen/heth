@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.heth.dao.utils;
+package eu.heth.utils;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -33,22 +33,22 @@ public class LoggingInterceptor implements MethodBeforeAdvice, AfterReturningAdv
 	 *      java.lang.Object[], java.lang.Object)
 	 */
 	@Override
-	public void before(Method p_Method, Object[] p_Args, Object p_Target) {
+	public void before(Method method, Object[] args, Object target) {
 		String message = null;
 		String messagearguments = null;
-		Logger logger = LoggerFactory.getLogger(getTargetObject(p_Target).getClass());
-		if (true == logger.isDebugEnabled()) {
-			message = ">>>>> " + p_Method.getName();
-			if (null != p_Args && p_Args.length > 0) {
+		Logger logger = LoggerFactory.getLogger(getTargetObject(target).getClass());
+		if (logger.isDebugEnabled()) {
+			message = ">>>>> " + method.getName();
+			if (null != args && args.length > 0) {
 				try {
 					messagearguments = "(";
-					for (int i = 0; i < p_Args.length; i++) {
-						if (null == p_Args[i]) {
-							messagearguments += p_Args[i];
+					for (int i = 0; i < args.length; i++) {
+						if (null == args[i]) {
+							messagearguments += args[i];
 						} else {
-							messagearguments += p_Args[i].toString();
+							messagearguments += args[i].toString();
 						}
-						if (i == p_Args.length - 1) {
+						if (i == args.length - 1) {
 							messagearguments += ")";
 						} else {
 							messagearguments += ",";
@@ -72,26 +72,26 @@ public class LoggingInterceptor implements MethodBeforeAdvice, AfterReturningAdv
 	 *      java.lang.reflect.Method, java.lang.Object[], java.lang.Object)
 	 */
 	@Override
-	public void afterReturning(Object p_ReturnValue, Method p_Method, Object[] p_Args, Object p_Target) {
-		Logger logger = LoggerFactory.getLogger(getTargetObject(p_Target).getClass());
+	public void afterReturning(Object returnValue, Method method, Object[] args, Object target) {
+		Logger logger = LoggerFactory.getLogger(getTargetObject(target).getClass());
 
-		if (true == logger.isDebugEnabled()) {
-			String message = "<<<<< " + p_Method.getName() + ":";
-			if (null != p_ReturnValue) {
+		if (logger.isDebugEnabled()) {
+			String message = "<<<<< " + method.getName() + ":";
+			if (null != returnValue) {
 				try {
-					if (true == p_ReturnValue.getClass().isArray()) {
-						int taille = Array.getLength(p_ReturnValue);
+					if (returnValue.getClass().isArray()) {
+						int taille = Array.getLength(returnValue);
 						message += "[";
 						for (int i = 0; i < taille - 1; i++) {
-							message += Array.get(p_ReturnValue, i);
+							message += Array.get(returnValue, i);
 							message += ",";
 						}
 						if (taille > 0) {
-							message += Array.get(p_ReturnValue, taille - 1);
+							message += Array.get(returnValue, taille - 1);
 						}
 						message += "]";
 					} else {
-						message += p_ReturnValue;
+						message += returnValue;
 					}
 				} catch (Exception ze) {
 					ze.printStackTrace();
@@ -105,21 +105,25 @@ public class LoggingInterceptor implements MethodBeforeAdvice, AfterReturningAdv
 	/**
 	 * After throwing.
 	 *
-	 * @param p_Method            the logged method
-	 * @param p_Args            the method's arguments
-	 * @param p_Target            the target object
-	 * @param p_Ex            the thrown exception
+	 * @param method
+	 *            the logged method
+	 * @param args
+	 *            the method's arguments
+	 * @param target
+	 *            the target object
+	 * @param ex
+	 *            the thrown exception
 	 */
-	public void afterThrowing(Method p_Method, Object[] p_Args, Object p_Target, Exception p_Ex) {
-		Logger logger = LoggerFactory.getLogger(getTargetObject(p_Target).getClass());
+	public void afterThrowing(Method method, Object[] args, Object target, Exception ex) {
+		Logger logger = LoggerFactory.getLogger(getTargetObject(target).getClass());
 
-		if (true == logger.isErrorEnabled()) {
-			logger.error("EXCEPTION (" + p_Ex.getClass().getName() + ") IN METHOD : " + p_Method.getName()
-					+ " - Exception is " + p_Ex.getMessage());
+		if (logger.isErrorEnabled()) {
+			logger.error("EXCEPTION (" + ex.getClass().getName() + ") IN METHOD : " + method.getName()
+					+ " - Exception is " + ex.getMessage());
 		}
-		if (true == logger.isDebugEnabled()) {
-			logger.debug("TRACE de l'exception (" + p_Ex.getClass().getName() + ") IN METHOD : " + p_Method.getName()
-					+ " - Exception is " + p_Ex.getMessage(), p_Ex);
+		if (logger.isDebugEnabled()) {
+			logger.debug("TRACE de l'exception (" + ex.getClass().getName() + ") IN METHOD : " + method.getName()
+					+ " - Exception is " + ex.getMessage(), ex);
 		}
 	}
 
@@ -127,18 +131,19 @@ public class LoggingInterceptor implements MethodBeforeAdvice, AfterReturningAdv
 	 * If p_Object is a proxy, return proxy target else the object. To logs
 	 * classe name (and no proxy name)
 	 *
-	 * @param p_Object            object
+	 * @param object
+	 *            object
 	 * @return the target object
 	 * @returnIf p_Object is a proxy, return proxy target else the object
 	 */
-	private Object getTargetObject(final Object p_Object) {
+	private Object getTargetObject(final Object object) {
 		try {
-			if (AopUtils.isJdkDynamicProxy(p_Object)) {
-				return ((Advised) p_Object).getTargetSource().getTarget();
+			if (AopUtils.isJdkDynamicProxy(object)) {
+				return ((Advised) object).getTargetSource().getTarget();
 			}
 		} catch (Exception e) {
 			// NTD
 		}
-		return p_Object;
+		return object;
 	}
 }

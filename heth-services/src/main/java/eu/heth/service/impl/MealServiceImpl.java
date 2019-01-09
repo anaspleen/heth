@@ -43,7 +43,7 @@ public class MealServiceImpl implements MealService {
 	@Override
 	public List<Meal> getMealsFromCooker(String cooker) throws ApplicationException, SystemException {
 
-		System.out.println("cooker : " + cooker);
+		LOG.debug("cooker : " + cooker);
 
 		List<IdentifiedError> errors = new ArrayList<IdentifiedError>();
 

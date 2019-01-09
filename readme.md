@@ -15,10 +15,10 @@ Example :
 export HETH_CONF_PATH=/products/eclipse/ws/heth/heth-services/src/test/resources
 
 - To run :
-mci ; java -jar heth-api/target/heth-api-1.0.0-SNAPSHOT.jar
+mci ; java -Dlogging.config=file:/products/eclipse/ws/heth/heth-services/src/test/resources/logback.xml -jar heth-api/target/heth-api-1.0.0-SNAPSHOT.jar
 
 - To debug :
-mci ; java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n  -jar heth-api/target/heth-api-1.0.0-SNAPSHOT.jar
+mci ; java -Dlogging.config=file:/products/eclipse/ws/heth/heth-services/src/test/resources/logback.xml -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n  -jar heth-api/target/heth-api-1.0.0-SNAPSHOT.jar
 
 - in a browser, go to [this URL](http://localhost:8080/api)
 

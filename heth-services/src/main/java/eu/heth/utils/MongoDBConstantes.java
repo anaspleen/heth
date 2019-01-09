@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.heth.dao.utils;
+package eu.heth.utils;
 
 /**
  * To manage tags

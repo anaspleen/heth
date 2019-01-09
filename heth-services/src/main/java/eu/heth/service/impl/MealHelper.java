@@ -3,7 +3,8 @@
  */
 package eu.heth.service.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
 import eu.heth.bean.MealBean;
@@ -18,7 +19,7 @@ import eu.heth.entity.MealEntity;
 public final class MealHelper {
 
 	/** logger */
-	private static final Logger LOG = Logger.getLogger(MealHelper.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MealHelper.class);
 
 	/**
 	 * Default const

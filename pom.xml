@@ -34,8 +34,8 @@
 		<java.version>1.8</java.version>
 
 		<!-- logs -->
-		<slf4j.version>1.7.21</slf4j.version>
-		<log4j.version>1.2.17</log4j.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<logback.version>1.2.3</logback.version>
 
 		<!-- commons -->
 		<commons-io.version>2.6</commons-io.version>
@@ -81,12 +81,19 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- utils -->
+			<!-- logs : logs -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
+				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
+
+			<!-- utils -->
 			<dependency>
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
