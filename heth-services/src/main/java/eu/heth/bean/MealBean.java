@@ -6,6 +6,8 @@ package eu.heth.bean;
 import java.io.Serializable;
 
 /**
+ * Impl a meal
+ * 
  * @author tomey
  *
  */

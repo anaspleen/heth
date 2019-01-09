@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
 import eu.heth.bean.Meal;
@@ -22,6 +23,8 @@ import eu.heth.exception.SystemException;
 import eu.heth.service.MealService;
 
 /**
+ * Impl of service
+ * 
  * @author tomey
  *
  */
@@ -82,8 +85,11 @@ public class MealServiceImpl implements MealService {
 
 		LOG.debug("In saveMealsFromCooker");
 
-		long currentTimeMillis = System.currentTimeMillis();
-		MealEntity entity = mealEntityRepository.save(new MealEntity(name, cooker));
+		MealEntity entityToSave = new MealEntity(name, cooker);
+		GeoJsonPoint point = new GeoJsonPoint(5.4, 45.2);
+		entityToSave.setLocation(point);
+
+		MealEntity entity = mealEntityRepository.save(entityToSave);
 		return entity.getId();
 	}
 

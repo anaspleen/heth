@@ -9,7 +9,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 import eu.heth.configuration.ApplicationConfig;
+import eu.heth.dao.repositories.CookerEntityRepository;
 import eu.heth.dao.repositories.MealEntityRepository;
+import eu.heth.service.CookerService;
 import eu.heth.service.MealService;
 
 /**
@@ -32,10 +34,10 @@ public abstract class HethCommonTestCase {
 	 *             exception
 	 */
 	public HethCommonTestCase() throws Exception {
-		
+
 		// set default path for ConfigProperties
 		System.setProperty("HETH_CONF_PATH", "./src/test/resources");
-		
+
 		context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 	}
 
@@ -69,5 +71,13 @@ public abstract class HethCommonTestCase {
 
 	public MealEntityRepository getMealEntityRepository() {
 		return (MealEntityRepository) context.getBean("mealEntityRepository");
+	}
+
+	public CookerService getCookerService() {
+		return (CookerService) context.getBean("cookerService");
+	}
+
+	public CookerEntityRepository getCookerEntityRepository() {
+		return (CookerEntityRepository) context.getBean("cookerEntityRepository");
 	}
 }

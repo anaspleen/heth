@@ -6,6 +6,7 @@ package eu.heth.entity;
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -34,6 +35,12 @@ public class MealEntity implements Serializable {
 	/** the cooker */
 	private String cooker;
 
+	/** the gps location */
+	private GeoJsonPoint location;
+
+	/** the gps radius */
+	private int radius;
+
 	/**
 	 * Default const
 	 */
@@ -41,6 +48,14 @@ public class MealEntity implements Serializable {
 		// NTD
 	}
 
+	/**
+	 * Const with datas
+	 * 
+	 * @param name
+	 *            the name
+	 * @param cooker
+	 *            the login cooker
+	 */
 	public MealEntity(String name, String cooker) {
 		// super();
 		this.name = name;
@@ -83,6 +98,36 @@ public class MealEntity implements Serializable {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return the location
+	 */
+	public GeoJsonPoint getLocation() {
+		return location;
+	}
+
+	/**
+	 * @param location
+	 *            the location to set
+	 */
+	public void setLocation(GeoJsonPoint location) {
+		this.location = location;
+	}
+
+	/**
+	 * @return the radius
+	 */
+	public int getRadius() {
+		return radius;
+	}
+
+	/**
+	 * @param radius
+	 *            the radius to set
+	 */
+	public void setRadius(int radius) {
+		this.radius = radius;
 	}
 
 	/*

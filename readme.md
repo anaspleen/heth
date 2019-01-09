@@ -30,8 +30,12 @@ Vel lytte, la utbygger gjøre jobben, være sikker på at jeg vil presse så for
 - To call :
 - Execute :
 TestMealService.testFindByCooker()
+TestCookerService.testFindByNickname()
 
 - Call with API REST client :
 To get meal from specific cooker :
 http://localhost:8080/api/meal/get?cooker=testFFF
 GET
+
+To get cooker :
+http://localhost:8080/api/cooker/get?nickname=yoda1
