@@ -11,15 +11,16 @@ import org.springframework.stereotype.Repository;
 import eu.heth.entity.MealEntity;
 
 /**
- * https://www.mkyong.com/spring-boot/spring-boot-spring-data-mongodb-example/
- * 
  * The meal repository
+ * 
+ * @see https://www.mkyong.com/spring-boot/spring-boot-spring-data-mongodb-example/
+ * 
+ *      No need implementation, just one interface, and you have CRUD, thanks
+ *      Spring Data
  * 
  * @author tomey
  *
  */
-// No need implementation, just one interface, and you have CRUD, thanks Spring
-// Data
 @Repository
 public interface MealEntityRepository extends MongoRepository<MealEntity, Long> {
 

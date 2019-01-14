@@ -74,4 +74,32 @@ public final class JSONUtils {
 		}
 		return res;
 	}
+
+	/**
+	 * Get the radius to send to MongoDB from radius in meter
+	 * 
+	 * @param radius
+	 *            the radius in meter
+	 * @return the radius for Mongos's request
+	 */
+	public static final double getRadiusFromMeterForMongoDB(double radius) {
+
+		// https://docs.mongodb.com/manual/tutorial/calculate-distances-using-spherical-geometry-with-2d-geospatial-indexes/
+		// The equatorial radius of the Earth is approximately 3,963.2 miles or
+		// 6,378.1 kilometers.
+
+		// example :
+		// The following query would return documents from the places collection
+		// within the circle described by the center [ -74, 40.74 ] with a
+		// radius of 100 miles:
+		// db.places.find( { loc: { $geoWithin: { $centerSphere: [ [ -74, 40.74
+		// ] ,
+		// 100 / 3963.2 ] } } } )
+
+		// double res = radius / (6378.1 * 1000);
+		double res = radius / 6378.1;
+		System.out.println(res + " -----------");
+
+		return res;
+	}
 }

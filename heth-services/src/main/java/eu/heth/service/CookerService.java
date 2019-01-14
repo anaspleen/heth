@@ -62,5 +62,6 @@ public interface CookerService {
 	 * @throws SystemException
 	 *             technical exception
 	 */
-	List<Cooker> searchCookers(int longitude, int latitude, int radius) throws ApplicationException, SystemException;
+	List<Cooker> searchCookersByLocation(double longitude, double latitude, double radius)
+			throws ApplicationException, SystemException;
 }

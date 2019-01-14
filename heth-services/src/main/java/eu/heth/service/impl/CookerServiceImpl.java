@@ -11,6 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
+import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
@@ -83,10 +86,11 @@ public class CookerServiceImpl implements CookerService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see eu.heth.service.CookerService#searchCookers(int, int, int)
+	 * @see eu.heth.service.CookerService#searchCookersByLocation(double,
+	 * double, double)
 	 */
 	@Override
-	public List<Cooker> searchCookers(int longitude, int latitude, int radius)
+	public List<Cooker> searchCookersByLocation(double longitude, double latitude, double radius)
 			throws ApplicationException, SystemException {
 
 		List<IdentifiedError> errors = new ArrayList<IdentifiedError>();
@@ -102,15 +106,15 @@ public class CookerServiceImpl implements CookerService {
 
 		List<Cooker> cookers = new ArrayList<Cooker>();
 
-		// TODO
-		// List<CookerEntity> entities =
-		// mealEntityRepository.findByCooker(cooker);
-		//
-		// if (entities != null && entities.size() > 0) {
-		// for (CookerEntity entity : entities) {
-		// cookers.add(CookerHelper.toBean(entity));
-		// }
-		// }
+		// search cookers from radius in meter (so radius/1000) !
+		List<CookerEntity> entities = getCookerEntityRepository().findByLocationNear(new Point(longitude, latitude),
+				new Distance(radius / 1000, Metrics.KILOMETERS));
+
+		if (entities != null && entities.size() > 0) {
+			for (CookerEntity entity : entities) {
+				cookers.add(CookerHelper.toBean(entity));
+			}
+		}
 
 		return cookers;
 	}

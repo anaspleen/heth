@@ -3,6 +3,8 @@
  */
 package eu.heth.test.service;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,10 +19,22 @@ import eu.heth.test.HethCommonTestCase;
  */
 public class TestCookerService extends HethCommonTestCase {
 
-	private static final String COOK_NAME_BEGIN = "cook";
+	// Chemin de Provinière, 38470 Vinay, France
+	private static final double longitudeX = 5.4;
+	private static final double latitudeY = 45.2;
+	// radius in meter
+	private static final double radius = 1000;
+
+	// Chemin de Pré Marot, 38470 Beaulieu (environ 300/400m l'un de l'autre)
+	// 5.402140617370605 45.199495489950095
+	private static final double preMarotLongitudeX = 5.402140617370605;
+	private static final double preMarotLatitudeY = 45.199495489950095;
 
 	public TestCookerService() throws Exception {
 		super();
+
+		// DB must have tis index
+		// db.cooker.createIndex({location:"2dsphere"})
 
 		System.out.println("Drop cookers");
 		getCookerEntityRepository().deleteAll();
@@ -43,6 +57,46 @@ public class TestCookerService extends HethCommonTestCase {
 		Assert.assertNotNull(cooker);
 
 		// TODO more checks
+	}
+
+	@Test
+	public void testFindByLocation() throws Exception {
+
+		String nickname = "yoda";
+
+		// insert meals
+		for (int i = 0; i < 4; i++) {
+			generateCookers(i, nickname);
+		}
+
+		// search them
+		List<Cooker> cookersFound = getCookerService().searchCookersByLocation(longitudeX, latitudeY, radius);
+		Assert.assertEquals(4, cookersFound.size());
+
+		// all
+		cookersFound = getCookerService().searchCookersByLocation(5.3999912, latitudeY, radius);
+		Assert.assertEquals(4, cookersFound.size());
+
+		// none of them because of 0
+		cookersFound = getCookerService().searchCookersByLocation(5.3, latitudeY, 0);
+		Assert.assertEquals(0, cookersFound.size());
+
+		// paris : 48.862725 / 2.287592
+		// none of them
+		cookersFound = getCookerService().searchCookersByLocation(2.287592, 48.862725, radius);
+		Assert.assertEquals(0, cookersFound.size());
+
+		// near (300/400 m), so 1000m is good
+		cookersFound = getCookerService().searchCookersByLocation(preMarotLongitudeX, preMarotLatitudeY, radius);
+		Assert.assertEquals(4, cookersFound.size());
+
+		// less than 100m
+		cookersFound = getCookerService().searchCookersByLocation(preMarotLongitudeX, preMarotLatitudeY, 100);
+		Assert.assertEquals(0, cookersFound.size());
+
+		// less than 400m
+		cookersFound = getCookerService().searchCookersByLocation(preMarotLongitudeX, preMarotLatitudeY, 400);
+		Assert.assertEquals(4, cookersFound.size());
 	}
 
 	/**
