@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import eu.heth.bean.Cooker;
+import eu.heth.bean.UserRole;
 import eu.heth.exception.ApplicationException;
 import eu.heth.exception.SystemException;
 import eu.heth.test.HethCommonTestCase;
@@ -33,11 +34,11 @@ public class TestCookerService extends HethCommonTestCase {
 	public TestCookerService() throws Exception {
 		super();
 
-		// DB must have tis index
-		// db.cooker.createIndex({location:"2dsphere"})
+		// DB must have this index
+		// db.user.createIndex({location:"2dsphere"})
 
 		System.out.println("Drop cookers");
-		getCookerEntityRepository().deleteAll();
+		getUserEntityRepository().deleteAll();
 	}
 
 	@Test
@@ -55,8 +56,11 @@ public class TestCookerService extends HethCommonTestCase {
 		Assert.assertNull(cooker);
 		cooker = getCookerService().getCookerByNickname(nickname + "1");
 		Assert.assertNotNull(cooker);
-
+		Assert.assertEquals(1, cooker.getRoles().size());
+		Assert.assertEquals(UserRole.cooker, cooker.getRoles().get(0));
 		// TODO more checks
+
+		// TODO modify it
 	}
 
 	@Test

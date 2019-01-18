@@ -12,8 +12,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-import eu.heth.dao.repositories.CookerEntityRepositoryCustom;
-import eu.heth.entity.CookerEntity;
+import eu.heth.dao.repositories.UserEntityRepositoryCustom;
+import eu.heth.entity.UserEntity;
 
 /**
  * The custom impl
@@ -21,10 +21,10 @@ import eu.heth.entity.CookerEntity;
  * @author tcaiati
  *
  */
-public class CookerEntityRepositoryMongo implements CookerEntityRepositoryCustom {
+public class UserEntityRepositoryMongo implements UserEntityRepositoryCustom {
 
 	/** logger */
-	private static final Logger LOG = LoggerFactory.getLogger(CookerEntityRepositoryMongo.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UserEntityRepositoryMongo.class);
 
 	@Autowired
 	private MongoTemplate mongoTemplate;
@@ -37,7 +37,7 @@ public class CookerEntityRepositoryMongo implements CookerEntityRepositoryCustom
 	 * java.lang.String)
 	 */
 	@Override
-	public List<CookerEntity> getCustom(String distance) {
+	public List<UserEntity> getCustom(String distance) {
 		// TODO Auto-generated method stub
 
 		// Query criteriaQuery = new Query(
@@ -45,7 +45,7 @@ public class CookerEntityRepositoryMongo implements CookerEntityRepositoryCustom
 		// "20km"));
 
 		Query criteriaQuery = new Query(new Criteria("name").is("Isaac"));
-		List<CookerEntity> result = getMongoTemplate().find(criteriaQuery, CookerEntity.class);
+		List<UserEntity> result = getMongoTemplate().find(criteriaQuery, UserEntity.class);
 
 		return result;
 	}

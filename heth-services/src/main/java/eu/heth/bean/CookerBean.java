@@ -3,9 +3,8 @@
  */
 package eu.heth.bean;
 
-import java.io.Serializable;
-
-import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Impl of Cooker
@@ -13,34 +12,22 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
  * @author tomey
  *
  */
-public class CookerBean implements Cooker, Serializable {
+public class CookerBean extends UserBean implements Cooker {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/** the identification */
-	private String nickname;
-
-	/** email */
-	private String email;
-
-	/** the name */
-	private String firstname; // prénom
-	private String lastname; // nom de famille
-
-	/** the gps location */
-	private GeoJsonPoint location;
-
-	/** the gps radius */
-	private int radius;
+	/** the meals */
+	private List<Meal> meals;
 
 	/**
 	 * Default const
 	 */
 	public CookerBean() {
-		// NTD
+		super();
+		this.meals = new ArrayList<Meal>();
 	}
 
 	/**
@@ -52,97 +39,30 @@ public class CookerBean implements Cooker, Serializable {
 	 *            the email
 	 */
 	public CookerBean(String nickname, String email) {
-		this.nickname = nickname;
-		this.email = email;
+		super(nickname, email);
+		this.meals = new ArrayList<Meal>();
 	}
 
 	/**
-	 * @return the location
+	 * @return the meals
 	 */
-	public GeoJsonPoint getLocation() {
-		return location;
+	public List<Meal> getMeals() {
+		return meals;
 	}
 
 	/**
-	 * @param location
-	 *            the location to set
+	 * @param meals
+	 *            the meals to set
 	 */
-	public void setLocation(GeoJsonPoint location) {
-		this.location = location;
+	public void setMeals(List<Meal> meals) {
+		this.meals = meals;
 	}
 
 	/**
-	 * @return the radius
+	 * @param meal
+	 *            the meal to add
 	 */
-	public int getRadius() {
-		return radius;
-	}
-
-	/**
-	 * @param radius
-	 *            the radius to set
-	 */
-	public void setRadius(int radius) {
-		this.radius = radius;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email
-	 *            the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * @return the firstname
-	 */
-	public String getFirstname() {
-		return firstname;
-	}
-
-	/**
-	 * @param firstname
-	 *            the firstname to set
-	 */
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	/**
-	 * @return the lastname
-	 */
-	public String getLastname() {
-		return lastname;
-	}
-
-	/**
-	 * @param lastname
-	 *            the lastname to set
-	 */
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	/**
-	 * @return the nickname
-	 */
-	public String getNickname() {
-		return nickname;
-	}
-
-	/**
-	 * @param nickname
-	 *            the nickname to set
-	 */
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void addMeal(Meal meal) {
+		this.meals.add(meal);
 	}
 }

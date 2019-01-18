@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
 import eu.heth.bean.CookerBean;
-import eu.heth.entity.CookerEntity;
+import eu.heth.entity.UserEntity;
 
 /**
  * Utils class to manage group beans / entities
@@ -35,7 +35,7 @@ public final class CookerHelper {
 	 *            entity
 	 * @return bean
 	 */
-	public static CookerBean toBean(CookerEntity entity) {
+	public static CookerBean toBean(UserEntity entity) {
 
 		CookerBean bean = null;
 
@@ -43,6 +43,8 @@ public final class CookerHelper {
 			try {
 				bean = new CookerBean();
 				BeanUtils.copyProperties(entity, bean);
+
+				// TODO all or not meals
 
 			} catch (Exception e) {
 				LOG.error("Error on creating cooker bean", e);

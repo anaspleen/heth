@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 import eu.heth.configuration.ApplicationConfig;
-import eu.heth.dao.repositories.CookerEntityRepository;
+import eu.heth.dao.repositories.UserEntityRepository;
 import eu.heth.dao.repositories.MealEntityRepository;
 import eu.heth.service.CookerService;
 import eu.heth.service.MealService;
@@ -77,7 +77,7 @@ public abstract class HethCommonTestCase {
 		return (CookerService) context.getBean("cookerService");
 	}
 
-	public CookerEntityRepository getCookerEntityRepository() {
-		return (CookerEntityRepository) context.getBean("cookerEntityRepository");
+	public UserEntityRepository getUserEntityRepository() {
+		return (UserEntityRepository) context.getBean("userEntityRepository");
 	}
 }

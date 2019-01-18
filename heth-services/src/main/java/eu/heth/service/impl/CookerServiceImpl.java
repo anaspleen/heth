@@ -18,8 +18,9 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
 import eu.heth.bean.Cooker;
-import eu.heth.dao.repositories.CookerEntityRepository;
-import eu.heth.entity.CookerEntity;
+import eu.heth.bean.UserRole;
+import eu.heth.dao.repositories.UserEntityRepository;
+import eu.heth.entity.UserEntity;
 import eu.heth.exception.ApplicationException;
 import eu.heth.exception.IdentifiedError;
 import eu.heth.exception.SystemException;
@@ -37,9 +38,9 @@ public class CookerServiceImpl implements CookerService {
 	/** logger */
 	private static final Logger LOG = LoggerFactory.getLogger(CookerServiceImpl.class);
 
-	/** the cooker */
+	/** the user */
 	@Autowired
-	private CookerEntityRepository cookerEntityRepository;
+	private UserEntityRepository userEntityRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -54,7 +55,7 @@ public class CookerServiceImpl implements CookerService {
 
 		Cooker cooker = null;
 
-		CookerEntity entity = getCookerEntityRepository().findFirstByNickname(nickname);
+		UserEntity entity = getUserEntityRepository().findFirstByNickname(nickname);
 		if (entity != null) {
 			cooker = CookerHelper.toBean(entity);
 		}
@@ -74,12 +75,13 @@ public class CookerServiceImpl implements CookerService {
 
 		// TODO check if nickname and email exists yet !
 
-		CookerEntity entityToSave = new CookerEntity(nickname, email);
+		UserEntity entityToSave = new UserEntity(nickname, email);
 		GeoJsonPoint point = new GeoJsonPoint(5.4, 45.2);
 		entityToSave.setLocation(point);
 		entityToSave.setRadius(1000);
+		entityToSave.addRole(UserRole.cooker);
 
-		CookerEntity entity = getCookerEntityRepository().save(entityToSave);
+		UserEntity entity = getUserEntityRepository().save(entityToSave);
 		return entity.getId();
 	}
 
@@ -107,11 +109,15 @@ public class CookerServiceImpl implements CookerService {
 		List<Cooker> cookers = new ArrayList<Cooker>();
 
 		// search cookers from radius in meter (so radius/1000) !
-		List<CookerEntity> entities = getCookerEntityRepository().findByLocationNear(new Point(longitude, latitude),
-				new Distance(radius / 1000, Metrics.KILOMETERS));
+		// List<UserEntity> entities =
+		// getUserEntityRepository().findByLocationNear(new Point(longitude,
+		// latitude),
+		// new Distance(radius / 1000, Metrics.KILOMETERS));
+		List<UserEntity> entities = getUserEntityRepository().findByLocationNearAndRoles(new Point(longitude, latitude),
+				new Distance(radius / 1000, Metrics.KILOMETERS), UserRole.cooker);
 
 		if (entities != null && entities.size() > 0) {
-			for (CookerEntity entity : entities) {
+			for (UserEntity entity : entities) {
 				cookers.add(CookerHelper.toBean(entity));
 			}
 		}
@@ -122,15 +128,15 @@ public class CookerServiceImpl implements CookerService {
 	/**
 	 * @return the cookerEntityRepository
 	 */
-	public CookerEntityRepository getCookerEntityRepository() {
-		return cookerEntityRepository;
+	public UserEntityRepository getUserEntityRepository() {
+		return userEntityRepository;
 	}
 
 	/**
 	 * @param cookerEntityRepository
 	 *            the cookerEntityRepository to set
 	 */
-	public void setCookerEntityRepository(CookerEntityRepository cookerEntityRepository) {
-		this.cookerEntityRepository = cookerEntityRepository;
+	public void setUserEntityRepository(UserEntityRepository cookerEntityRepository) {
+		this.userEntityRepository = cookerEntityRepository;
 	}
 }

@@ -3,49 +3,19 @@
  */
 package eu.heth.bean;
 
-import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import java.util.List;
 
 /**
- * Represents a cooker
+ * Represent a Cooker
  * 
- * @author tomey
+ * @author tcaiati
  *
  */
-public interface Cooker {
+public interface Cooker extends User {
 
 	/**
 	 * 
-	 * @return nickname of cooker
+	 * @return all meals for this cooker
 	 */
-	String getNickname();
-
-	/**
-	 * 
-	 * @return email of cooker
-	 */
-	String getEmail();
-
-	/**
-	 * 
-	 * @return the firstname of cooker
-	 */
-	String getFirstname();
-
-	/**
-	 * 
-	 * @return the lastname of cooker
-	 */
-	String getLastname();
-
-	/**
-	 * 
-	 * @return the location
-	 */
-	GeoJsonPoint getLocation();
-
-	/**
-	 * 
-	 * @return the radius of location
-	 */
-	int getRadius();
+	List<Meal> getMeals();
 }

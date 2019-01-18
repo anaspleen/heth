@@ -5,13 +5,13 @@ package eu.heth.dao.repositories;
 
 import java.util.List;
 
-import org.springframework.data.geo.Circle;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import eu.heth.entity.CookerEntity;
+import eu.heth.bean.UserRole;
+import eu.heth.entity.UserEntity;
 
 /**
  * 
@@ -21,41 +21,45 @@ import eu.heth.entity.CookerEntity;
  *
  */
 @Repository
-public interface CookerEntityRepository extends MongoRepository<CookerEntity, Long> {
+public interface UserEntityRepository extends MongoRepository<UserEntity, Long> {
 
 	/**
 	 * To get the cooker
 	 * 
 	 * @param nickname
 	 *            the nickname
-	 * @return the cooker
+	 * @return the user
 	 */
-	CookerEntity findFirstByNickname(String nickname);
+	UserEntity findFirstByNickname(String nickname);
 
 	/**
 	 * To get all cooker from a circle (point and radius)
 	 * 
 	 * @param circle
 	 *            the circle
-	 * @return cookers entities found
+	 * @return users entities found
 	 */
-	List<CookerEntity> findByLocationWithin(Circle circle);
+	List<UserEntity> findByLocationNear(Point location, Distance distance);
 
 	/**
-	 * To get all cooker from a circle (point and radius)
+	 * To get all cooker from a circle (point and radius) with a role
 	 * 
-	 * @param circle
-	 *            the circle
-	 * @return cookers entities found
+	 * @param location
+	 *            the point
+	 * @param distance
+	 *            the distance in meter
+	 * @param role
+	 *            the role to find
+	 * @return users entities found
 	 */
-	List<CookerEntity> findByLocationNear(Point location, Distance distance);
+	List<UserEntity> findByLocationNearAndRoles(Point location, Distance distance, UserRole role);
 
 	/**
 	 * To get all cooker from a circle (point and radius)
 	 *
 	 * @param circle
 	 *            the circle
-	 * @return cookers entities found
+	 * @return users entities found
 	 */
 	// @Query("{ location: { $geoWithin: { $centerSphere: [ [ ?0, ?1] , ?3
 	// /3963.2 ] } } } ")

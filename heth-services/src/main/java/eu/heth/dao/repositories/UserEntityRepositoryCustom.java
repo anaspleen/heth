@@ -5,7 +5,7 @@ package eu.heth.dao.repositories;
 
 import java.util.List;
 
-import eu.heth.entity.CookerEntity;
+import eu.heth.entity.UserEntity;
 
 /**
  * To add more queries, see :
@@ -15,7 +15,7 @@ import eu.heth.entity.CookerEntity;
  * @author tcaiati
  *
  */
-public interface CookerEntityRepositoryCustom {
+public interface UserEntityRepositoryCustom {
 
 	/**
 	 * To get all cooker from a circle (point and radius)
@@ -24,5 +24,5 @@ public interface CookerEntityRepositoryCustom {
 	 *            the circle
 	 * @return cookers entities found
 	 */
-	List<CookerEntity> getCustom(String distance);
+	List<UserEntity> getCustom(String distance);
 }

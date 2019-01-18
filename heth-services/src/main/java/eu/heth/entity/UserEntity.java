@@ -4,20 +4,24 @@
 package eu.heth.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import eu.heth.bean.UserRole;
+
 /**
- * The cooker entity
+ * The user entity
  * 
  * @author tomey
  *
  */
-@Document(collection = "cooker")
-public class CookerEntity implements Serializable {
+@Document(collection = "user")
+public class UserEntity implements Serializable {
 
 	/**
 	 * 
@@ -46,11 +50,15 @@ public class CookerEntity implements Serializable {
 	/** the gps radius */
 	private int radius;
 
+	/** the roles */
+	private List<UserRole> roles;
+
 	/**
 	 * Default const
 	 */
-	public CookerEntity() {
+	public UserEntity() {
 		// NTD
+		this.roles = new ArrayList<UserRole>();
 	}
 
 	/**
@@ -61,7 +69,8 @@ public class CookerEntity implements Serializable {
 	 * @param email
 	 *            the email
 	 */
-	public CookerEntity(String nickname, String email) {
+	public UserEntity(String nickname, String email) {
+		this.roles = new ArrayList<UserRole>();
 		this.nickname = nickname;
 		this.email = email;
 	}
@@ -179,5 +188,28 @@ public class CookerEntity implements Serializable {
 	 */
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	/**
+	 * @return the roles
+	 */
+	public List<UserRole> getRoles() {
+		return roles;
+	}
+
+	/**
+	 * @param roles
+	 *            the roles to set
+	 */
+	public void setRoles(List<UserRole> roles) {
+		this.roles = roles;
+	}
+
+	/**
+	 * @param role
+	 *            the role to add
+	 */
+	public void addRole(UserRole role) {
+		this.roles.add(role);
 	}
 }
